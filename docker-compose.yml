@@ -3,7 +3,7 @@ services:
     container_name: bbw-frontend-dev-func-v4
     restart: always
     build:
-      context: ./businesstrips-wishlist-client-func-v2-usereducer-after
+      context: businesstrips-frontend
       dockerfile: Dockerfile
     volumes:
       - "./businesstrips-wishlist-client-func-v2-usereducer-after:/app"

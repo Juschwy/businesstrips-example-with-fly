@@ -4,28 +4,39 @@ on:
     branches:
       - master
 jobs:
+  deploy_db:
+    if: ${{ github.event.label.name == 'deploy_db' }}
+    runs-on: ubuntu-latest
+    concurrency: deploy-group
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+        name: Deploy DB
+        run: flyctl deploy
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        working-directory: ./businesstrips-db
   deploy_backend:
-    if: ${{ github.event.label.name == 'deploy_back' }}
+    if: ${{ github.event.label.name == 'deploy_backend' }}
     runs-on: ubuntu-latest
     concurrency: deploy-group
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Deploy Backend
-        run: flyctl deploy --remote-only
+        name: Deploy Backend
+        run: flyctl deploy --remote-only --build-arg=ALLOW_ORIGIN=${{ vars.FRONTEND_URL }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        working-directory: ./SpringBootBusinessTripsv2
-
+        working-directory: ./spring-backend
   deploy_frontend:
-    if: ${{ github.event.label.name == 'deploy_front' }}
+    if: ${{ github.event.label.name == 'deploy_frontend' }}
     runs-on: ubuntu-latest
     concurrency: deploy-group
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Deploy Frontend
+        name: Deploy Frontend
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        working-directory: ./businesstrips-wishlist-client-func-v2-usereducer-after
+        working-directory: ./businesstrips-frontend
