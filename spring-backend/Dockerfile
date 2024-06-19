@@ -8,4 +8,4 @@ RUN mvn install -DskipTests
 FROM openjdk:17-slim
 COPY --from=backend-build /app/target/*.jar app.jar
 ARG ALLOW_ORIGIN="http://localhost:3000"
-ENTRYPOINT ["sh", "-c", "java", "-jar", "app.jar", "--app.allowOrigin=$ALLOW_ORIGIN"]
+ENTRYPOINT ["sh", "-c", "APP_ALLOWEDORIGIN=$ALLOW_ORIGIN", "java", "-jar", "app.jar"]
