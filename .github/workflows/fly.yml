@@ -5,7 +5,7 @@ on:
       - closed
 jobs:
   deploy_db:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'deploy_db') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'deploy_db') }}
     runs-on: ubuntu-latest
     concurrency: deploy-group
     steps:
@@ -16,7 +16,7 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         working-directory: ./businesstrips-db
   deploy_backend:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'deploy_backend') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'deploy_backend') }}
     runs-on: ubuntu-latest
     concurrency: deploy-group
     steps:
@@ -27,7 +27,7 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         working-directory: ./spring-backend
   deploy_frontend:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'deploy_frontend') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'deploy_frontend') }}
     runs-on: ubuntu-latest
     concurrency: deploy-group
     steps:
