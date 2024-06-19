@@ -1,4 +1,4 @@
-This example workspace includes:
+This example workspace includes: 
 - backend SpringBoot REST for biztrips
 - maria db 
 - phpMyAdmin
