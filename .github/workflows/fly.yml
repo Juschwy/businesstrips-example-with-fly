@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master
+  label:
+    types:
+      - created
 jobs:
   deploy_db:
     if: ${{ github.event.label.name == 'deploy_db' }}
