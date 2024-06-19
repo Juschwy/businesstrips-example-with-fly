@@ -1,7 +1,9 @@
 package ch.clip.trips.repo.main;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -9,13 +11,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class SpringWebConfig implements WebMvcConfigurer {
-	@Value("${app.allowedOrigin")
-	private static final String allowedOrigin = "http://localhost:3000";
 	/**
 	 * CORS - Policy - from known Servers
 	 */
+	@Autowired
+	Environment env;
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins(allowedOrigin);
+		System.out.println("Allowed Origin: " + env.getProperty("app.allowedOrigin"));
+		registry.addMapping("/**").allowedOrigins(env.getProperty("app.allowedOrigin"));
 	}
 }
