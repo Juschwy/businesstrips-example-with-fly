@@ -13,12 +13,14 @@ public class SpringWebConfig implements WebMvcConfigurer {
     /**
      * CORS - Policy - from known Servers
      */
-    @Autowired
-    Environment env;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        System.out.println("Allowed Origin: " + env.getProperty("allowedOrigin"));
-        registry.addMapping("/**").allowedOrigins(env.getProperty("allowedOrigin"));
+        String allowedOrigin = System.getenv("CORS_ALLOWED_ORIGIN");
+        if (allowedOrigin == null) {
+            allowedOrigin = "http://localhost:3000";
+        }
+        System.out.println("Allowed Origin: " + allowedOrigin);
+        registry.addMapping("/**").allowedOrigins(allowedOrigin);
     }
 }
