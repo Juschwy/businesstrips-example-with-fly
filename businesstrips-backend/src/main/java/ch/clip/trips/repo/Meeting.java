@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 
-@Data
 @Entity
 public class Meeting implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 6705527563808382509L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +20,7 @@ public class Meeting implements Serializable {
 	private String description;
 
 	@ManyToOne
-	@JoinColumn(name = "business_trip_idfs")
+	@JoinColumn(name = "business_trip_id_fs")
 	@JsonBackReference
 	private BusinessTrip businessTrip;
 

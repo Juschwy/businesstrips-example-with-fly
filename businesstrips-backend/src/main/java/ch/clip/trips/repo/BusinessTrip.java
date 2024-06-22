@@ -5,14 +5,16 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
 @Entity
 public class BusinessTrip implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 67027563808382509L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
