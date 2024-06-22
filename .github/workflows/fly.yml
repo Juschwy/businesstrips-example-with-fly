@@ -25,7 +25,7 @@ jobs:
       - run: flyctl deploy --remote-only --build-arg=ALLOW_ORIGIN=${{ vars.FRONTEND_URL }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        working-directory: .businesstrips-backend
+        working-directory: ./businesstrips-backend
   deploy_frontend:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'deploy_frontend') }}
     runs-on: ubuntu-latest
