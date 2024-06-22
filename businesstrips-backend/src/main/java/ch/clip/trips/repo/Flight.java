@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 public class Flight implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 6705527563808382509L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,7 +25,7 @@ public class Flight implements Serializable {
 
 
 	@ManyToOne
-	@JoinColumn(name="employee_idfs")
+	@JoinColumn(name="employee_id_fs")
 	@JsonBackReference
 	private Employee employee;
 
