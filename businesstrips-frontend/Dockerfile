@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:18.12.1-alpine
+FROM node:18-alpine
 # add a bash shell to the image
 RUN apk add --no-cache bash
 # set working directory
@@ -15,7 +15,8 @@ COPY package.json ./
 #RUN npm install react-scripts@5.0.1 -g --silent
 RUN yarn
 # add All to app
-COPY . ./
+COPY ./src/ ./src/
+COPY ./public/ ./public/
 
 # start app
 # CMD ["npm", "start"]
