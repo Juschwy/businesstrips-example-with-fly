@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --build-arg=ALLOW_ORIGIN=${{ vars.FRONTEND_URL }}
+      - run: flyctl deploy --remote-only --env=CORS_ALLOWED_ORIGIN=${{ vars.FRONTEND_URL }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         working-directory: ./businesstrips-backend

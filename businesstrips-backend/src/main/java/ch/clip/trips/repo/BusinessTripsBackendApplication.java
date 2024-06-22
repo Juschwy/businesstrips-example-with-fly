@@ -23,10 +23,17 @@ public class BusinessTripsBackendApplication {
             databaseUrl = "postgresql://postgres:mysecretpassword@localhost:5432/businesstrips";
         }
         String[] databaseUrlSplit = databaseUrl.split("([/:@])");
+        System.out.println("Database URL: " + databaseUrl);
         HashMap<String, Object> properties = new HashMap<>();
-        properties.put("spring.datasource.url", "jdbc:postgresql://" + databaseUrlSplit[5] + ":" + databaseUrlSplit[6] + "/" + databaseUrlSplit[7]);
-        properties.put("spring.datasource.username", databaseUrlSplit[3]);
-        properties.put("spring.datasource.password", databaseUrlSplit[4]);
+        String connectionString = "jdbc:postgresql://" + databaseUrlSplit[5] + ":" + databaseUrlSplit[6] + "/" + databaseUrlSplit[7];
+        String username = databaseUrlSplit[3];
+        String password = databaseUrlSplit[4];
+        System.out.println("ConnectionString: " + connectionString);
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+        properties.put("spring.datasource.url", connectionString);
+        properties.put("spring.datasource.username", username);
+        properties.put("spring.datasource.password", password);
         application.setDefaultProperties(properties);
 
         application.run(args);
