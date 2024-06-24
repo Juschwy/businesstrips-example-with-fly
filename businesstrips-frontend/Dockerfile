@@ -1,24 +1,38 @@
-# pull official base image
-FROM node:18-alpine
-# add a bash shell to the image
+# Stage 1: Build React App
+FROM node:18-alpine AS build
+
+# Add a bash shell to the image
 RUN apk add --no-cache bash
-# set working directory
+
+# Set working directory
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
+# Add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-RUN echo "Path: $PATH"
-# install app dependencies
+
+# Define build arguments
+ARG BACKEND_URL="http://localhost:8080"
+ENV REACT_APP_BACKEND_URL=$BACKEND_URL
+
+# Install app dependencies
 COPY package.json ./
-#COPY package-lock.json ./
-#RUN npm install --silent
-#RUN npm install react-scripts@5.0.1 -g --silent
-RUN yarn
-# add All to app
+RUN yarn install --silent
+
+# Add all to app
 COPY ./src/ ./src/
 COPY ./public/ ./public/
 
-# start app
-# CMD ["npm", "start"]
-# Best-Practice with ENTRYPOINT!
-ENTRYPOINT ["yarn", "start"]
+# Build the app
+RUN yarn build
+
+# Stage 2: Serve React App
+FROM nginx:stable-alpine
+
+# Copy build artifacts from Stage 1
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
