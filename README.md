@@ -17,6 +17,10 @@ a cloud wich can be chosen!
 
 ### Github Action
 
+- 3 Deployments für DB, Backend & Frontend
+- Token für fly.io eingebaut
+- Deployment nach Github Lable
+
 ### Backend
 
 - Cross Origin durchreichen
@@ -31,3 +35,9 @@ a cloud wich can be chosen!
 - DB mit App verlinken, sodass eine Env Variable mit dem Connection String eingefügt wird
 
 ### Frontend
+
+- workflow angepasst mit build-arg für die BACKEND_URL
+- Dockerfile Multistage Build + ENV für URL setzen
+- ENV Variabel in React abrufen
+
+
