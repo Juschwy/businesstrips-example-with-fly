@@ -13,6 +13,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 # Define build arguments
 ARG BACKEND_URL="http://localhost:8080"
 ENV REACT_APP_BACKEND_URL=$BACKEND_URL
+ARG STORAGE_URL="https://fly.storage.tigris.dev/businesstrips-bucket/"
+ENV STORAGE_URL=$STORAGE_URL
 
 # Install app dependencies
 COPY package.json ./
