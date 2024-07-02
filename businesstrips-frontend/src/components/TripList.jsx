@@ -40,7 +40,7 @@ function Trip({ dispatch, trip }) {
   // Props, deconstruct props trip
   let { id, title, description, startTrip, endTrip } = trip;
 
-  const storageUrl = process.env.STORAGE_URL ?? "https://fly.storage.tigris.dev/businesstrips-bucket/"
+  const storageUrl = process.env.STORAGE_URL ?? "https://fly.storage.tigris.dev/businesstrips-storage/"
 
   return (
     <div className="col-sm-6 col-md-4 col-lg-3">

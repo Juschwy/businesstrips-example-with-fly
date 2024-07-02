@@ -77,7 +77,7 @@ function Wish(props) {
   let { id, title, description, startTrip, endTrip } = item;
  // let { id, title, description, startTrip, endTrip } = props.item;
 
-  const storageUrl = process.env.STORAGE_URL ?? "https://fly.storage.tigris.dev/businesstrips-bucket/"
+  const storageUrl = process.env.STORAGE_URL ?? "https://fly.storage.tigris.dev/businesstrips-storage/"
 
   return (
     <tr key={id}>
