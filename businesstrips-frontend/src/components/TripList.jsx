@@ -40,11 +40,13 @@ function Trip({ dispatch, trip }) {
   // Props, deconstruct props trip
   let { id, title, description, startTrip, endTrip } = trip;
 
+  const storageUrl = process.env.STORAGE_URL ?? "https://fly.storage.tigris.dev/businesstrips-storage/"
+
   return (
     <div className="col-sm-6 col-md-4 col-lg-3">
       <figure className="card card-product">
         <div className="img-wrap">
-          <img src={"images/items/" + id + ".jpg"} alt="name " />
+          <img src={storageUrl + id + ".jpg"} alt="name " />
         </div>
         <figcaption className="info-wrap">
           <a href="#. . . " className="title">

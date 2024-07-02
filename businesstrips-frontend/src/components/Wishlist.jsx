@@ -77,6 +77,8 @@ function Wish(props) {
   let { id, title, description, startTrip, endTrip } = item;
  // let { id, title, description, startTrip, endTrip } = props.item;
 
+  const storageUrl = process.env.STORAGE_URL ?? "https://fly.storage.tigris.dev/businesstrips-storage/"
+
   return (
     <tr key={id}>
       <td>
@@ -84,7 +86,7 @@ function Wish(props) {
           <div className="img-wrap">
             <img
               className="img-thumbnail img-xs"
-              src={"images/items/" + id + ".jpg"}
+              src={storageUrl + id + ".jpg"}
               alt="img"
             />
           </div>
